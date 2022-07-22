@@ -1,0 +1,9 @@
+#set( $updateList = {} )
+#foreach( $entry in $ctx.args.updatePropertyInput.keySet() )
+  #set( $discard = $updateList.put($entry, "'$ctx.args.updatePropertyInput[$entry]'") )
+#end
+#set( $update = $updateList.toString().replace("{","").replace("}","") )
+{
+  "version": "2018-05-29",
+  "statements":   ["UPDATE property SET $update WHERE propertyID='$ctx.args.updatePropertyInput.propertyID'", "SELECT * FROM Property WHERE propertyID='$ctx.args.updatePropertyInput.propertyID'"]
+}

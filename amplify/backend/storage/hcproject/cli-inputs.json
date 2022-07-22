@@ -1,0 +1,16 @@
+{
+  "resourceName": "hcproject",
+  "policyUUID": "4f17aec5",
+  "bucketName": "hcbucket",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "S3Trigger13087de8",
+  "groupAccess": {}
+}

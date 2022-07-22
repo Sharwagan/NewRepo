@@ -1,0 +1,75 @@
+input AMPLIFY {
+  globalAuthRule: AuthRule = {allow: public}
+}
+
+input CreateContactInput {
+  contactID: String!
+  contactName: String
+  mobile: String
+  address: String
+}
+
+type contact {
+  contactID: String!
+  contactName: String
+  mobile: String
+  address: String
+}
+
+input UpdateContactInput {
+  contactID: String!
+  contactName: String
+  mobile: String
+  address: String
+}
+
+input CreatePropertyInput {
+  propertyID: String!
+  contactID: String
+  HouseType: String
+  bdrm: Int
+  sqft: Float
+}
+
+type property {
+  propertyID: String!
+  contactID: String
+  HouseType: String
+  bdrm: Int
+  sqft: Float
+}
+
+input UpdatePropertyInput {
+  propertyID: String!
+  contactID: String
+  HouseType: String
+  bdrm: Int
+  sqft: Float
+}
+
+type Mutation {
+  deleteContact(contactID: String!): contact
+  createContact(createContactInput: CreateContactInput!): contact
+  updateContact(updateContactInput: UpdateContactInput!): contact
+  deleteProperty(propertyID: String!): property
+  createProperty(createPropertyInput: CreatePropertyInput!): property
+  updateProperty(updatePropertyInput: UpdatePropertyInput!): property
+}
+
+type Query {
+  getContact(contactID: String!): contact
+  listContacts: [contact]
+  getProperty(propertyID: String!): property
+  listPropertys: [property]
+}
+
+type Subscription {
+  onCreateContact: contact @aws_subscribe(mutations: ["createContact"])
+  onCreateProperty: property @aws_subscribe(mutations: ["createProperty"])
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
